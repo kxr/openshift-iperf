@@ -55,4 +55,16 @@ Options:
     Shows help
     Default: Not set
 
+Examples:
 
+# Run with default options
+./openshift-iperf.sh
+
+# Run UDP based bandwidth test
+./openshift-iperf.sh --udp
+
+# Run bandwidth test on a specific interface present on node
+./openshift-iperf.sh --interface bond0
+
+# Specify client and server nodes for bandwidth test
+./openshift-iperf.sh --client-node sharedocp48-f9w4j-worker-gq96m --serving-node sharedocp48-f9w4j-master-0
