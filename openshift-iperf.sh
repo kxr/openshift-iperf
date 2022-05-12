@@ -1,33 +1,4 @@
 #!/bin/bash
-#
-# A script to collect tcpdumps of traffic between two pods/nodes.
-# Currently only tested on OpenShift 4.x / OpenShiftSDN.
-#
-# DO NOT RUN IN PRODUCTION
-#
-# Following is the workflow:
-#   1- Create "serving" pod on the first node running a minimal (python) http server.
-#   2- Create "client" pod on the second node that will be used to curl the first pod.
-#   3- Create "host-capture" pods on each node to capture host network traffic (tun0, veth etc.)
-#   4- Send start signal to the pods that will trigger them to start simulating traffic (curl)
-#      and collecting tcpdumps from the relevant interfaces.
-#   5- Wait for the duration defined.
-#   6- Send stop signal to the pods that will trigger the pods to stop the simulation/collection.
-#   7- Collect the collected logs.
-#
-# Following log files are collected from each node:
-#   *-pod-tcpdump.pcap: tcpdump of eth0 interface from inside the pod.
-#   veth*-tcpdump.pcap: tcpdump of the serving/client pod from the host interface.
-#   tun0-tcpdump.pcap: tcpdump of tun0 interface on the hosts.
-#   *-def_int-tcpdump.pcap: tcpdump of default interface on the hosts.
-#   ovs-info.txt: ovs bridge and flows on the hosts.
-#   web-server.log: Python webserver logs for each curl received.
-#   curl.log: verbose curl ouptut for each curl call
-#   *.run.log files: Runtime info from the pods/scripts.
-#   iflink_*: iflink number of the pod interface (ignore)
-#   
-# Author: Khizer Naeem (knaeem@redhat.com)
-# 14 Aug 2021
 
 export SDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
@@ -339,6 +310,7 @@ echo "===> Collecting binding IP:"
 SIP=$(oc exec pod/${S_POD} -- cat /tmp/IP) \
   || err "Failed to get the binding IP (/tmp/IP) from pod/${S_POD}"
 echo "Done (${SIP})"
+echo
 
 # Client Pod on Client Node
 C_POD="iperf-${TS,,}-client"
