@@ -68,3 +68,6 @@ Examples:
 
 # Specify client and server nodes for bandwidth test
 ./openshift-iperf.sh --client-node sharedocp48-f9w4j-worker-gq96m --serving-node sharedocp48-f9w4j-master-0
+
+# Run iperf test on pod network (eth0)
+./openshift-iperf.sh --network pod
