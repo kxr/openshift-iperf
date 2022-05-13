@@ -1,0 +1,22 @@
+10.44.134.239
+-----------------------------------------------------------
+Server listening on 5201
+-----------------------------------------------------------
+Accepted connection from 10.44.134.170, port 45694
+[  5] local 10.44.134.239 port 5201 connected to 10.44.134.170 port 45696
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-5.00   sec   115 MBytes   193 Mbits/sec                  
+[  5]   5.00-10.00  sec  59.9 MBytes   101 Mbits/sec                  
+[  5]  10.00-15.02  sec   213 MBytes   357 Mbits/sec                  
+[  5]  15.02-20.07  sec   164 MBytes   272 Mbits/sec                  
+[  5]  20.07-25.13  sec   163 MBytes   270 Mbits/sec                  
+[  5]  25.13-30.02  sec   206 MBytes   353 Mbits/sec                  
+[  5]  30.02-35.00  sec   235 MBytes   396 Mbits/sec                  
+[  5]  35.00-40.03  sec   199 MBytes   332 Mbits/sec                  
+[  5]  40.03-45.03  sec  90.9 MBytes   152 Mbits/sec                  
+[  5]  45.03-50.00  sec   250 MBytes   421 Mbits/sec                  
+[  5]  50.00-55.04  sec   258 MBytes   430 Mbits/sec                  
+[  5]  55.04-60.02  sec   164 MBytes   276 Mbits/sec                  
+- - - - - - - - - - - - - - - - - - - - - - - - -
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-60.02  sec  2.07 GBytes   296 Mbits/sec                  receiver

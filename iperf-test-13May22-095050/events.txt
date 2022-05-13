@@ -1,0 +1,19 @@
+LAST SEEN   TYPE     REASON    OBJECT                            MESSAGE
+112m        Normal   Pulled    pod/iperf-13may22-075959-client   Container image "quay.io/kxr/iperf3" already present on machine
+112m        Normal   Created   pod/iperf-13may22-075959-client   Created container client
+112m        Normal   Started   pod/iperf-13may22-075959-client   Started container client
+112m        Normal   Pulled    pod/iperf-13may22-075959-server   Container image "quay.io/kxr/iperf3" already present on machine
+112m        Normal   Created   pod/iperf-13may22-075959-server   Created container server
+112m        Normal   Started   pod/iperf-13may22-075959-server   Started container server
+67m         Normal   Pulled    pod/iperf-13may22-084411-client   Container image "quay.io/kxr/iperf3" already present on machine
+67m         Normal   Created   pod/iperf-13may22-084411-client   Created container client
+67m         Normal   Started   pod/iperf-13may22-084411-client   Started container client
+68m         Normal   Pulled    pod/iperf-13may22-084411-server   Container image "quay.io/kxr/iperf3" already present on machine
+68m         Normal   Created   pod/iperf-13may22-084411-server   Created container server
+68m         Normal   Started   pod/iperf-13may22-084411-server   Started container server
+71s         Normal   Pulled    pod/iperf-13may22-095050-client   Container image "quay.io/kxr/iperf3" already present on machine
+70s         Normal   Created   pod/iperf-13may22-095050-client   Created container client
+70s         Normal   Started   pod/iperf-13may22-095050-client   Started container client
+89s         Normal   Pulled    pod/iperf-13may22-095050-server   Container image "quay.io/kxr/iperf3" already present on machine
+84s         Normal   Created   pod/iperf-13may22-095050-server   Created container server
+84s         Normal   Started   pod/iperf-13may22-095050-server   Started container server

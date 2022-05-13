@@ -1,0 +1,16 @@
+SCRIPT CALL:     ./openshift-iperf.sh 
+
+NETWORK:         POD
+INTERFACE/IP     eth0/
+SERVING NODE:    sharedocp48-f9w4j-master-0
+CLIENT NODE:     sharedocp48-f9w4j-worker-gq96m
+PROJECT NAME:    iperf-test
+TEST DURATION:   60
+CONTAINER IMAGE: quay.io/kxr/iperf3
+TIME STAMP:      12May22-211926
+TRAFFIC MODE:     TCP
+
+SERVING IP:     10.129.0.44
+S_POD:          iperf-12may22-211926-server
+C_POD:          iperf-12may22-211926-client
+

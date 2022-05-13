@@ -2,6 +2,8 @@
 
 export SDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+ARGS=${@}
+
 err() {
     echo; echo;
     echo -e "\e[97m\e[101m[ERROR]\e[0m ${1}"; shift; echo;
@@ -182,6 +184,7 @@ fi
 
 # Timestamp
 TS=$(date +%d%h%y-%H%M%S)
+
 # Directory variables should not have / at the end
 DIR_NAME="${PROJECT_NAME}-${TS}"
 HOST_TMPDIR="/host/tmp/${DIR_NAME}"
@@ -217,6 +220,7 @@ echo "===> Summary:"
 echo
 echo
 echo -e "\tNETWORK:         ${NET^^}"
+echo -e "\tINTERFACE/IP     ${INTERFACE}/${IP}"
 echo -e "\tSERVING NODE:    ${S_NODE}"
 echo -e "\tCLIENT NODE:     ${C_NODE}"
 echo -e "\tPROJECT NAME:    ${PROJECT_NAME}"
@@ -308,7 +312,7 @@ echo
 # Collect the IP Address that we bind in iperf
 echo "===> Collecting binding IP:"
 SIP=$(oc exec pod/${S_POD} -- cat /tmp/IP) \
-  || err "Failed to get the binding IP (/tmp/IP) from pod/${S_POD}"
+  || err "Failed to get the iperf bind/server IP (/tmp/IP) from pod/${S_POD}"
 echo "Done (${SIP})"
 echo
 
@@ -345,10 +349,10 @@ echo
 echo "===> Waiting for client pod (${C_POD}) to become ready:"
 while true; do
     phase=$(oc get pod/${C_POD} -o jsonpath='{.status.phase}' 2> /dev/null)
-    if [ ${phase} == "Running" ]; then
+    if [ "${phase}" == "Running" ]; then
         break
     fi
-    if [ ${phase} == "Failed" ]; then
+    if [ "${phase}" == "Failed" ]; then
         err "Client pod failed. See: oc logs ${C_POD} -n ${PROJECT_NAME}"
     fi
     sleep 2
@@ -359,4 +363,53 @@ echo
 
 echo "================================"
 echo
+
 oc logs -f pod/${C_POD} -n ${PROJECT_NAME}
+
+echo
+echo "================================"
+echo
+
+# Save all relevant output
+
+echo "===> Saving test results to local directory ("${DIR_NAME}"):"
+
+mkdir "${DIR_NAME}"
+
+(
+echo "SCRIPT CALL:     ${0} ${ARGS}"
+echo
+echo "NETWORK:         ${NET^^}"
+echo "INTERFACE/IP     ${INTERFACE}/${IP}"
+echo "SERVING NODE:    ${S_NODE}"
+echo "CLIENT NODE:     ${C_NODE}"
+echo "PROJECT NAME:    ${PROJECT_NAME}"
+echo "TEST DURATION:   ${DURATION}"
+echo "CONTAINER IMAGE: ${IPERF_IMAGE}"
+echo "TIME STAMP:      ${TS}"
+if [ -n "UDP" ]; then
+echo "TRAFFIC MODE:    TCP"
+else
+echo "TRAFFIC MODE:    UDP"
+fi
+echo
+echo "SERVING IP:      ${SIP}"
+echo "S_POD:           ${S_POD}"
+echo "C_POD:           ${C_POD}"
+echo
+) >> ${DIR_NAME}/options.txt
+
+oc get pods -o wide >> ${DIR_NAME}/pods.txt
+
+oc get nodes -o wide >> ${DIR_NAME}/nodes.txt
+
+oc get pod ${S_POD} ${C_POD} -o yaml >> ${DIR_NAME}/pods.yaml
+
+oc get nodes -o yaml >> ${DIR_NAME}/nodes.yaml
+
+oc get events >> ${DIR_NAME}/events.txt
+
+oc logs ${S_POD} >> ${DIR_NAME}/${S_POD}.log
+oc logs ${C_POD} >> ${DIR_NAME}/${C_POD}.log
+
+echo Done
