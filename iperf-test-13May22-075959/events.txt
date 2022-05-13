@@ -1,7 +1,0 @@
-LAST SEEN   TYPE     REASON    OBJECT                            MESSAGE
-69s         Normal   Pulled    pod/iperf-13may22-075959-client   Container image "quay.io/kxr/iperf3" already present on machine
-68s         Normal   Created   pod/iperf-13may22-075959-client   Created container client
-68s         Normal   Started   pod/iperf-13may22-075959-client   Started container client
-84s         Normal   Pulled    pod/iperf-13may22-075959-server   Container image "quay.io/kxr/iperf3" already present on machine
-81s         Normal   Created   pod/iperf-13may22-075959-server   Created container server
-81s         Normal   Started   pod/iperf-13may22-075959-server   Started container server
